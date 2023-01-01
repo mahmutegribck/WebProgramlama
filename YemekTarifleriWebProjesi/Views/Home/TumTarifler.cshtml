@@ -1,0 +1,27 @@
+﻿@model IEnumerable<YemekTarifleriWebProjesi.Models.YemekTarifleri>
+
+@{
+    ViewData["Title"] = "Tarif";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Tüm Tarifler</h3>
+
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <a asp-action="Tarif" asp-route-id="@item.TarifId">
+                @Html.DisplayFor(modelItem => item.Yemekadi)
+
+
+
+                (@Html.DisplayFor(modelItem => item.EklemeTarihi) tarihinde eklendi. Kategorisi : @Html.DisplayFor(modelItem => item.Kategori.Kategoriadi))
+
+                Edit
+
+            </a>
+        </li>
+    }
+</ul>
