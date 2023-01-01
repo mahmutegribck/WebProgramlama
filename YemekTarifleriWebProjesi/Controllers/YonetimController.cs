@@ -4,6 +4,8 @@ using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
+using System.Text;
+using XSystem.Security.Cryptography;
 using YemekTarifleriWebProjesi.Models;
 
 namespace YemekTarifleriWebProjesi.Controllers
@@ -16,11 +18,7 @@ namespace YemekTarifleriWebProjesi.Controllers
             return View();
         }
         
-       
-        public IActionResult Kullanicilar()
-        {
-            return View();
-        }
+      
         public IActionResult Bilgilerim()
         {
             return View();
@@ -262,9 +260,9 @@ namespace YemekTarifleriWebProjesi.Controllers
 
         public IActionResult Kullanicilar()
         {
-            var tarifler = db.YemekTarifleris.Include(k => k.Kategori).Where(t => t.Silindi == false).OrderBy(t => t.Yemekadi).ToList();
+            var kullanicilar = db.Kullanicilars.Where(t => t.Silindi == false).OrderBy(t => t.Yetki).OrderBy(t => t.Adi).OrderBy(t => t.Soyadi).ToList();
 
-            return View(tarifler);
+            return View(kullanicilar);
         }
 
         public IActionResult KullaniciEkle()
@@ -278,6 +276,7 @@ namespace YemekTarifleriWebProjesi.Controllers
         public IActionResult KullaniciEkle(Kullanicilar kullanicilar)
         {
             kullanicilar.Silindi = false;
+
             db.Kullanicilars.Add(kullanicilar);
             db.SaveChanges();
 
@@ -304,23 +303,37 @@ namespace YemekTarifleriWebProjesi.Controllers
             kullanici.Soyadi= kllnc.Soyadi;
             kullanici.Eposta = kllnc.Eposta;
             kullanici.Telefon = kllnc.Telefon;
-            if(!String.IsNullOrEmpty(kllnc.Parola.Trim()))
+
+            try
             {
-                kullanici.Parola = kllnc.Parola;
+                if (kllnc.Parola.Trim().Length != 0)
+                {
+                    kullanici.Parola = kllnc.Parola;
+                }
             }
+            catch 
+            {
+
+               
+            }
+            
             kullanici.Yetki = kllnc.Yetki;
             db.Kullanicilars.Update(kullanici);
             db.SaveChanges();
 
-            return RedirectToAction("Tarifler");
+            return RedirectToAction("Kullanicilar");
         }
         public IActionResult KullaniciSil(int id)
         {
-            var tarif = db.YemekTarifleris.Where(t => t.Silindi == false && t.TarifId == id).FirstOrDefault();
-            tarif.Silindi = true;
-            db.YemekTarifleris.Update(tarif);
+            var kullanici = db.Kullanicilars.Where(t => t.Silindi == false && t.KullaniciId == id).FirstOrDefault();
+            kullanici.Silindi = true;
+            db.Kullanicilars.Update(kullanici);
             db.SaveChanges();
-            return RedirectToAction("Tarifler");
+            return RedirectToAction("Kullanicilar");
         }
+
+      
+
     }
 }
+

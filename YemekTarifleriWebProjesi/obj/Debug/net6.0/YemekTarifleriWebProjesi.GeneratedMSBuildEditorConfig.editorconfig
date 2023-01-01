@@ -60,6 +60,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxLYXRlZ29yaVllbWVrbGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Mahmut/Desktop/YemekTarifleriWebProjesi/Views/Yonetim/KullaniciEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxLdWxsYW5pY2lFa2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahmut/Desktop/YemekTarifleriWebProjesi/Views/Yonetim/KullaniciGuncelle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxLdWxsYW5pY2lHdW5jZWxsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Mahmut/Desktop/YemekTarifleriWebProjesi/Views/Yonetim/Kullanicilar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxLdWxsYW5pY2lsYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

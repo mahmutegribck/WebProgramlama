@@ -62,14 +62,14 @@ public partial class YemektarifleriDbContext : DbContext
                 .HasMaxLength(100)
                 .HasColumnName("eposta");
             entity.Property(e => e.Parola)
-                .HasMaxLength(25)
+                .HasMaxLength(50)
                 .HasColumnName("parola");
             entity.Property(e => e.Silindi).HasColumnName("silindi");
             entity.Property(e => e.Soyadi)
                 .HasMaxLength(100)
                 .HasColumnName("soyadi");
             entity.Property(e => e.Telefon)
-                .HasMaxLength(15)
+                .HasMaxLength(20)
                 .HasColumnName("telefon");
             entity.Property(e => e.Yetki).HasColumnName("yetki");
         });

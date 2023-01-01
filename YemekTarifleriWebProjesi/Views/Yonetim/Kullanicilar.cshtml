@@ -8,7 +8,7 @@
 <h1>Kullanicilar</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="KullaniciEkle">Yeni Kullanıcı</a>
 </p>
 <table class="table">
     <thead>
@@ -26,17 +26,11 @@
                 @Html.DisplayNameFor(model => model.Telefon)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Parola)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Yetki)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Aktif)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Silindi)
-            </th>
+            </th>          
             <th></th>
         </tr>
     </thead>
@@ -56,21 +50,14 @@
                 @Html.DisplayFor(modelItem => item.Telefon)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Parola)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Yetki)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Aktif)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Silindi)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.KullaniciId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.KullaniciId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.KullaniciId">Delete</a>
+                <a asp-action="KullaniciGetir" asp-route-id="@item.KullaniciId">Düzenle</a> |
+                <a asp-action="KullaniciSil" asp-route-id="@item.KullaniciId" onclick="return confirm('Kullanıcı Silinsin Mi?')">Sil</a>
             </td>
         </tr>
 }
