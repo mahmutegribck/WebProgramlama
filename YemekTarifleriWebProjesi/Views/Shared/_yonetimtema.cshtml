@@ -233,22 +233,11 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item sidebar-actions">
-                        <span class="nav-link">
-                            <div class="border-bottom">
-                                <h6 class="font-weight-normal mb-3">Projects</h6>
-                            </div>
-                            <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a project</button>
-                            <div class="mt-4">
-                                <div class="border-bottom">
-                                    <p class="text-secondary">Categories</p>
-                                </div>
-                                <ul class="gradient-bullet-list mt-4">
-                                    <li>Free</li>
-                                    <li>Pro</li>
-                                </ul>
-                            </div>
-                        </span>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Yonetim" asp-action="CikisYap">
+                            <span class="menu-title">Çıkış Yap</span>
+                            <i class="mdi mdi-contacts menu-icon"></i>
+                        </a>
                     </li>
                 </ul>
             </nav>
@@ -264,12 +253,11 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 grid-margin stretch-card">
+                    
                             @RenderBody()
-                        </div>
                         
-                    </div>
+                        
+                    
                 </div>
                 <!-- content-wrapper ends -->
                 <!-- partial:~/Admin/partials/_footer.html -->
