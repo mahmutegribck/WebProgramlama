@@ -1,18 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
-using XSystem.Security.Cryptography;
+
 using YemekTarifleriWebProjesi.Models;
 
 namespace YemekTarifleriWebProjesi.Controllers
 {
+    [Authorize]
     public class YonetimController : Controller
     {
         YemektarifleriDbContext db = new YemektarifleriDbContext();
+
+
         public IActionResult Index()
         {
             return View();

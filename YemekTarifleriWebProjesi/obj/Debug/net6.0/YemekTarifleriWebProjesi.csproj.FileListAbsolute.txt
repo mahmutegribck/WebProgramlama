@@ -287,5 +287,3 @@ C:\Users\Mahmut\Desktop\YemekTarifleriWebProjesi\bin\Debug\net6.0\runtimes\unix\
 C:\Users\Mahmut\Desktop\YemekTarifleriWebProjesi\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 C:\Users\Mahmut\Desktop\YemekTarifleriWebProjesi\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Mahmut\Desktop\YemekTarifleriWebProjesi\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
-C:\Users\Mahmut\Desktop\YemekTarifleriWebProjesi\bin\Debug\net6.0\Microsoft.Practices.ServiceLocation.dll
-C:\Users\Mahmut\Desktop\YemekTarifleriWebProjesi\bin\Debug\net6.0\XAct.Core.PCL.dll
