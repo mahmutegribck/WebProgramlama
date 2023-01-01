@@ -52,7 +52,7 @@
             <td>
                 <a asp-action="SayfaGetir" asp-route-id="@item.SayfaId">Düzenle</a> |
                @* <a asp-action="Details" asp-route-id="@item.SayfaId">Details</a> |*@
-                <a asp-action="SayfaSil" asp-route-id="@item.SayfaId">Sil</a>
+                <a asp-action="SayfaSil" asp-route-id="@item.SayfaId" onclick="return confirm('Sayfa Silinsin Mi?')">Sil</a>
             </td>
         </tr>
 }

@@ -44,6 +44,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Mahmut/Desktop/YemekTarifleriWebProjesi/Views/Yonetim/KategoriEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxLYXRlZ29yaUVrbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahmut/Desktop/YemekTarifleriWebProjesi/Views/Yonetim/KategoriGuncelle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxLYXRlZ29yaUd1bmNlbGxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahmut/Desktop/YemekTarifleriWebProjesi/Views/Yonetim/Kategoriler.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxLYXRlZ29yaWxlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahmut/Desktop/YemekTarifleriWebProjesi/Views/Yonetim/KategoriYemekler.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxLYXRlZ29yaVllbWVrbGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Mahmut/Desktop/YemekTarifleriWebProjesi/Views/Yonetim/Kullanicilar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxLdWxsYW5pY2lsYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -54,6 +70,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Mahmut/Desktop/YemekTarifleriWebProjesi/Views/Yonetim/SayfaGetir.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxTYXlmYUdldGlyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Mahmut/Desktop/YemekTarifleriWebProjesi/Views/Yonetim/SayfaGuncelle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWW9uZXRpbVxTYXlmYUd1bmNlbGxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Mahmut/Desktop/YemekTarifleriWebProjesi/Views/Yonetim/Sayfalar.cshtml]

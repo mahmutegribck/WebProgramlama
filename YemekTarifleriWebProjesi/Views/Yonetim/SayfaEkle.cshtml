@@ -21,9 +21,9 @@
             <div class="form-group">
                 <label asp-for="Icerik" class="control-label"></label>
                 @*<input asp-for="Icerik" class="form-control" />*@
-                <textarea asp-for="Icerik" name="editor1"></textarea>
+                <textarea asp-for="Icerik" name="Icerik"></textarea>
                     <script>
-                        CKEDITOR.replace("editor1")
+                    CKEDITOR.replace("Icerik")
                     </script>
                 
                 <span asp-validation-for="Icerik" class="text-danger"></span>

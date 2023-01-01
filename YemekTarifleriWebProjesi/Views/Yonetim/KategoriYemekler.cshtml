@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<YemekTarifleriWebProjesi.Models.YemekTarifleri>
 
 @{
-    ViewData["Title"] = "Tarifler";
+    ViewData["Title"] = "KategoriYemekler";
     Layout = "~/Views/Shared/_yonetimtema.cshtml";
 }
 
-<h1>Tarifler</h1>
+<h1>KategoriYemekler</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -59,7 +59,7 @@
                 @Html.DisplayFor(modelItem => item.Silindi)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Kategori.Kategoriadi)
+                @Html.DisplayFor(modelItem => item.Kategori.KategoriId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.TarifId">Edit</a> |
