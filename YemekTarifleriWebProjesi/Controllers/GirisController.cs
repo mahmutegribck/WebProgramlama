@@ -25,7 +25,8 @@ namespace YemekTarifleriWebProjesi.Controllers
                 var talepler = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Email, kullanici.Eposta.ToString()),
-                    new Claim(ClaimTypes.Role, yetki)
+                    new Claim(ClaimTypes.Role, yetki),
+                    new Claim(ClaimTypes.NameIdentifier, kullanici.KullaniciId.ToString())
 
                 };
                 ClaimsIdentity kimlik = new ClaimsIdentity(talepler,"Login");
@@ -54,7 +55,7 @@ namespace YemekTarifleriWebProjesi.Controllers
         public async Task<IActionResult> CikisYap()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return View();
+            return RedirectToAction("Index","Home");
         }
     }
 }

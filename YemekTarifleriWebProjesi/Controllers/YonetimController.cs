@@ -5,13 +5,14 @@ using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
+using System.Security.Claims;
 using System.Text;
 
 using YemekTarifleriWebProjesi.Models;
 
 namespace YemekTarifleriWebProjesi.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Yonetici")]
     public class YonetimController : Controller
     {
         YemektarifleriDbContext db = new YemektarifleriDbContext();
@@ -25,7 +26,43 @@ namespace YemekTarifleriWebProjesi.Controllers
       
         public IActionResult Bilgilerim()
         {
-            return View();
+            int kulId = Convert.ToInt32(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var girisYapanKullanici = db.Kullanicilars.Find(kulId);
+            girisYapanKullanici.Parola = "";
+            return View(girisYapanKullanici);
+        }
+        public IActionResult BilgilerimiGuncelle(Kullanicilar kllnc)
+        {
+
+
+            var kullanici = db.Kullanicilars.Where(t => t.Silindi == false && t.KullaniciId == kllnc.KullaniciId).FirstOrDefault();
+
+            kullanici.Adi = kllnc.Adi;
+            kullanici.Soyadi = kllnc.Soyadi;
+            kullanici.Eposta = kllnc.Eposta;
+            kullanici.Telefon = kllnc.Telefon;
+
+            try
+            {
+                if (kllnc.Parola.Trim().Length != 0)
+                {
+                    kullanici.Parola = kllnc.Parola;
+                }
+            }
+            catch
+            {
+
+
+            }
+
+            kullanici.Yetki = kllnc.Yetki;
+            db.Kullanicilars.Update(kullanici);
+            db.SaveChanges();
+
+            return RedirectToAction("Bilgilerim");
+
+
+
         }
         public IActionResult Sayfalar()
         {
