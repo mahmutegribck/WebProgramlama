@@ -1,0 +1,80 @@
+﻿@model IEnumerable<YemekTarifleriWebProjesi.Models.Yorumlar>
+
+@{
+    ViewData["Title"] = "Yorumlar";
+    Layout = "~/Views/Shared/_yonetimtema.cshtml";
+}
+
+<h1>Yorumlar</h1>
+
+@using(Html.BeginForm())
+{
+    <div class="row" >
+        <div class="col-6">
+
+            <label for="listelemeturu" class="form-text">Listeleme Türü</label>
+            <select id="listelemeturu" name="listelemeturu" class="form-control">
+                <option value="Tumu">Tümü</option>
+                <option value="Onayli">Onaylı</option>
+                <option value="Onaysiz">Onaysız</option>
+            </select>
+
+            
+
+        </div>
+        <div class="col-6">
+
+            <input type="submit" value="Listele" class="btn btn-primary" />
+
+        </div>
+    </div>
+    
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Yorum
+            </th>            
+            <th>
+                EklemeTarihi
+            </th>
+            <th>
+                Onay Durumu
+            </th>  
+            <th>
+                Tarif
+            </th>
+            <th>
+                Üye
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Yorum)
+            </td>      
+            <td>
+                @Html.DisplayFor(modelItem => item.EklemeTarihi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aktif)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TarifNavigation.Yemekadi)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Uye.Adi)&nbsp; @Html.DisplayFor(modelItem => item.Uye.Soyadi)
+            </td>
+            <td>
+                
+                <a asp-action="Onayla" asp-route-id="@item.YorumId" onclick="return confirm('Onay Durumu Değişsin Mi?')">Onayla/Gizle</a> |
+                    <a asp-action="YorumSil" asp-route-id="@item.YorumId" onclick="return confirm('Yorum Silinsin Mi?')">Yorum Sil</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

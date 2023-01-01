@@ -16,10 +16,7 @@ namespace YemekTarifleriWebProjesi.Controllers
             return View();
         }
         
-        public IActionResult Yorumlar()
-        {
-            return View();
-        }
+       
         public IActionResult Kullanicilar()
         {
             return View();
@@ -212,6 +209,118 @@ namespace YemekTarifleriWebProjesi.Controllers
         public IActionResult CikisYap()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Yorumlar()
+        {
+            var yorumlar = db.Yorumlars.Include(t => t.TarifNavigation).Include(u => u.Uye).Where(y => y.Silindi  == false).OrderByDescending(y => y.EklemeTarihi).ToList();
+
+            return View(yorumlar);
+
+ 
+
+        }
+        [HttpPost]
+        public IActionResult Yorumlar(string listelemeturu)
+        {
+            var yorumlar = db.Yorumlars.Include(t => t.TarifNavigation).Include(u => u.Uye).Where(y => y.Silindi == false).OrderByDescending(y => y.EklemeTarihi).ToList();
+            switch (listelemeturu)
+            {
+                case "Onayli": yorumlar = db.Yorumlars.Include(t => t.TarifNavigation).Include(u => u.Uye).Where(y => y.Silindi == false && y.Aktif == true).OrderByDescending(y => y.EklemeTarihi).ToList(); break;
+
+                case "Onaysiz": yorumlar = db.Yorumlars.Include(t => t.TarifNavigation).Include(u => u.Uye).Where(y => y.Silindi == false && y.Aktif == false).OrderByDescending(y => y.EklemeTarihi).ToList(); break;
+               
+            }
+            return View(yorumlar);
+
+
+
+        }
+
+
+
+        public IActionResult Onayla(int id)
+        {
+            var yorum = db.Yorumlars.Where(y => y.Silindi == false && y.YorumId == id).FirstOrDefault();
+            yorum.Aktif = Convert.ToBoolean((-1*Convert.ToInt32(yorum.Aktif))+1);
+            db.Yorumlars.Update(yorum);
+            db.SaveChanges();
+            return RedirectToAction("Yorumlar");
+        }
+        public IActionResult YorumSil(int id)
+        {
+            var yorum = db.Yorumlars.Where(y => y.Silindi == false && y.YorumId == id).FirstOrDefault();
+            yorum.Aktif = true;
+            db.Yorumlars.Update(yorum);
+            db.SaveChanges();
+            return RedirectToAction("Yorumlar");
+        }
+
+
+
+
+        public IActionResult Kullanicilar()
+        {
+            var tarifler = db.YemekTarifleris.Include(k => k.Kategori).Where(t => t.Silindi == false).OrderBy(t => t.Yemekadi).ToList();
+
+            return View(tarifler);
+        }
+
+        public IActionResult KullaniciEkle()
+        {
+            
+                              
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult KullaniciEkle(Kullanicilar kullanicilar)
+        {
+            kullanicilar.Silindi = false;
+            db.Kullanicilars.Add(kullanicilar);
+            db.SaveChanges();
+
+            return RedirectToAction("Kullanicilar");
+
+
+
+
+        }
+
+        public IActionResult KullaniciGetir(int id)
+        {
+            var kullanici = db.Kullanicilars.Where(t => t.Silindi == false && t.KullaniciId == id).FirstOrDefault();
+            
+            return View("KullaniciGüncelle", kullanici);
+        }
+
+        public IActionResult KullaniciGuncelle(Kullanicilar kllnc)
+        {
+            var kullanici = db.Kullanicilars.Where(t => t.Silindi == false && t.KullaniciId == kllnc.KullaniciId).FirstOrDefault();
+
+            kullanici.Aktif = kllnc.Aktif;
+            kullanici.Adi = kllnc.Adi;
+            kullanici.Soyadi= kllnc.Soyadi;
+            kullanici.Eposta = kllnc.Eposta;
+            kullanici.Telefon = kllnc.Telefon;
+            if(!String.IsNullOrEmpty(kllnc.Parola.Trim()))
+            {
+                kullanici.Parola = kllnc.Parola;
+            }
+            kullanici.Yetki = kllnc.Yetki;
+            db.Kullanicilars.Update(kullanici);
+            db.SaveChanges();
+
+            return RedirectToAction("Tarifler");
+        }
+        public IActionResult KullaniciSil(int id)
+        {
+            var tarif = db.YemekTarifleris.Where(t => t.Silindi == false && t.TarifId == id).FirstOrDefault();
+            tarif.Silindi = true;
+            db.YemekTarifleris.Update(tarif);
+            db.SaveChanges();
+            return RedirectToAction("Tarifler");
         }
     }
 }
