@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Build.Framework;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -108,7 +109,7 @@ namespace YemekTarifleriWebProjesi.Controllers
 
         public IActionResult KategoriYemekler(int id)
         {
-            var yemekler = db.YemekTarifleris.Where(y => y.Silindi == false && y.KategoriId == id).ToList();
+            var yemekler = db.YemekTarifleris.Include(k => k.Kategori).Where(y => y.Silindi == false && y.KategoriId == id).ToList();
             return View("Tarifler", yemekler);
         }
 
@@ -142,6 +143,14 @@ namespace YemekTarifleriWebProjesi.Controllers
 
         public IActionResult TarifEkle()
         {
+            var kategoriler = (from k in db.Kategorilers.Where(k => k.Silindi == false && k.Aktif == true).ToList()
+            select new SelectListItem
+            {
+                Text = k.Kategoriadi,
+                Value = k.KategoriId.ToString()
+            }
+            );
+            ViewBag.KategoriId = kategoriler;
             return View();
         }
 
@@ -149,6 +158,7 @@ namespace YemekTarifleriWebProjesi.Controllers
         public IActionResult TarifEkle(YemekTarifleri yemekTarifleri)
         {
             yemekTarifleri.Silindi = false;
+            yemekTarifleri.EklemeTarihi = DateTime.Now;
             db.YemekTarifleris.Add(yemekTarifleri);
             db.SaveChanges();
 
@@ -157,8 +167,15 @@ namespace YemekTarifleriWebProjesi.Controllers
 
         public IActionResult TarifGetir(int id)
         {
-            var tarif = db.YemekTarifleris.Where(t => t.Silindi == false && t.TarifId == id).FirstOrDefault();
-
+            var tarif = db.YemekTarifleris.Include(k => k.Kategori).Where(t => t.Silindi == false && t.TarifId == id).FirstOrDefault();
+            var kategoriler = (from k in db.Kategorilers.Where(k => k.Silindi == false && k.Aktif == true).ToList()
+                               select new SelectListItem
+                               {
+                                   Text = k.Kategoriadi,
+                                   Value = k.KategoriId.ToString()
+                               }
+           );
+            ViewBag.KategoriId = kategoriler;
             return View("TarifGuncelle", tarif);
         }
 
@@ -176,7 +193,7 @@ namespace YemekTarifleriWebProjesi.Controllers
             tarif.Sira = trf.Sira;
             tarif.KategoriId = trf.KategoriId;
             tarif.Aktif = trf.Aktif;
-
+            
             
             db.YemekTarifleris.Update(tarif);
             db.SaveChanges();
@@ -189,7 +206,7 @@ namespace YemekTarifleriWebProjesi.Controllers
             tarif.Silindi = true;
             db.YemekTarifleris.Update(tarif);
             db.SaveChanges();
-            return RedirectToAction("Tarif");
+            return RedirectToAction("Tarifler");
         }
 
         public IActionResult CikisYap()
