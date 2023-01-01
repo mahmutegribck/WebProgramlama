@@ -30,9 +30,23 @@ namespace YemekTarifleriWebProjesi.Controllers
         }
         public IActionResult Tarif(int id)
         {
-            
+            TarifYorumlar t = new TarifYorumlar();
             var tarifler = db.YemekTarifleris.Include(k => k.Kategori).Where(a => a.Silindi == false && a.Aktif == true && a.TarifId == id).FirstOrDefault();
-            return View(tarifler);
+            t.Tarifler = tarifler;
+            var yorumlar = db.Yorumlars.Include(u => u.Uye).Where(a => a.Silindi == false && a.Aktif == true && a.TarifId == id).OrderByDescending(y => y.EklemeTarihi).ToList();
+            t.Yorumlar= yorumlar;
+            return View(t);
+        }
+
+        public IActionResult YorumYap(Yorumlar yor)
+        {
+            yor.Silindi = false;
+            yor.Aktif = false;
+            yor.EklemeTarihi = DateTime.Now;
+            db.Yorumlars.Add(yor);
+            db.SaveChanges();
+            TempData["mesaj"] = "Yorumunuz Alındı, Yönetici Onayından Sonra Görünecektir";
+            return Redirect("/Home/Tarif" +yor.TarifId);
         }
 
         public IActionResult Privacy()

@@ -1,18 +1,57 @@
-﻿@model YemekTarifleriWebProjesi.Models.YemekTarifleri
+﻿@model YemekTarifleriWebProjesi.Models.TarifYorumlar
 
 @{
     ViewData["Title"] = "Tarif";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>@Model.Yemekadi</h4>
-<h5>Kategori: @Model.Kategori.Kategoriadi</h5>
+<h4>@Model.Tarifler.Yemekadi</h4>
+<h5>Kategori: @Model.Tarifler.Kategori.Kategoriadi</h5>
 <div>
-    @Html.Raw(Model.Tarif)<br/>
-    <small>@Model.EklemeTarihi tarihinde eklendi.</small>
-
+    @Html.Raw(Model.Tarifler.Tarif)<br/>
+    <small>@Model.Tarifler.EklemeTarihi tarihinde eklendi.</small>
+    @if(Model.Yorumlar.Count>0)
+    {
+        <h5>Yorumlar:</h5>
+    }
+    @foreach(var item in Model.Yorumlar)
+    {
+        <b>@Html.Raw(item.Yorum)</b ><br/>
+        <small>@item.Uye.Adi @item.Uye.Soyadi tarafından @item.EklemeTarihi tarihinde gönderildi.</small><br/><br/>
+    }
 </div>
+@using System.Security.Claims;
+@{
+    try
+    {
+        string kulID = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+        <form asp-action="YorumYap" asp-controller="Home" method="post">
+            
+            <input type= "hidden" id="UyeId"  name = "UyeId" value ="@kulID"/>
+            <input type="hidden" id="TarifId" name="TarifId" value="@Model.Tarifler.TarifId" />
 
+            <textarea id="Yorum" name="Yorum">
+            
+            </textarea>
+
+            <input id = "btnYorumGonder" type ="submit" value="Yorum Gönder"/>
+
+
+        </form>
+        @if(@TempData["mesaj"] != null)
+        {
+            <div class="alert">
+            @TempData["mesaj"]
+            </div>
+        }
+
+    }
+    catch (Exception)
+    {
+        
+        throw;
+    }
+}
 <a asp-action="TumTarifler">Geri</a>
 
      
